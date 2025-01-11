@@ -10,30 +10,66 @@
 <body class="bg-light">
     <div class="container mt-5">
         <h1 class="text-center mb-4">Request Debugging Information</h1>
-        
-        <h2>Client Information</h2>
-        <table class="table table-striped table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th>Attribute</th>
-                    <th>Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Client IP</td>
-                    <td><?= htmlspecialchars($_SERVER['REMOTE_ADDR'] ?? 'Not Available') ?></td>
-                </tr>
-                <tr>
-                    <td>Forwarded For</td>
-                    <td><?= htmlspecialchars($_SERVER['HTTP_X_FORWARDED_FOR'] ?? 'Not Available') ?></td>
-                </tr>
-                <tr>
-                    <td>Remote Port</td>
-                    <td><?= htmlspecialchars($_SERVER['REMOTE_PORT'] ?? 'Not Available') ?></td>
-                </tr>
-            </tbody>
-        </table>
+
+        <div class="row">
+            <!-- Client Information -->
+            <div class="col-md-6">
+                <h2>Client Information</h2>
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Client IP</td>
+                            <td><?= htmlspecialchars($_SERVER['REMOTE_ADDR'] ?? 'Not Available') ?></td>
+                        </tr>
+                        <tr>
+                            <td>Forwarded For</td>
+                            <td><?= htmlspecialchars($_SERVER['HTTP_X_FORWARDED_FOR'] ?? 'Not Available') ?></td>
+                        </tr>
+                        <tr>
+                            <td>Remote Port</td>
+                            <td><?= htmlspecialchars($_SERVER['REMOTE_PORT'] ?? 'Not Available') ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Server Information -->
+            <div class="col-md-6">
+                <h2>Server Information</h2>
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Server IP</td>
+                            <td><?= htmlspecialchars($_SERVER['SERVER_ADDR'] ?? 'Not Available') ?></td>
+                        </tr>
+                        <tr>
+                            <td>Server Name</td>
+                            <td><?= htmlspecialchars($_SERVER['SERVER_NAME'] ?? 'Not Available') ?></td>
+                        </tr>
+                        <tr>
+                            <td>Server Port</td>
+                            <td><?= htmlspecialchars($_SERVER['SERVER_PORT'] ?? 'Not Available') ?></td>
+                        </tr>
+                        <tr>
+                            <td>Document Root</td>
+                            <td><?= htmlspecialchars($_SERVER['DOCUMENT_ROOT'] ?? 'Not Available') ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
         <h2>Request Headers</h2>
         <table class="table table-striped table-bordered">
