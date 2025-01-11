@@ -1,0 +1,26 @@
+services:
+  elasticsearch:
+    image: elasticsearch:8.15.3
+    environment:
+      - node.name=elasticsearch
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - network.host=0.0.0.0
+      - xpack.security.enabled=true
+      - ELASTIC_PASSWORD=TdptwLko5fGX6THYSnMtHFUSh0SYltT/pncvdxjyj60g=
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+    networks:
+      - elastic_network
+    deploy:
+      restart_policy:
+        condition: on-failure
+        
+networks:
+  elastic_network:
+    external: true

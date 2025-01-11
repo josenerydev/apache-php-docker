@@ -4,3 +4,15 @@ docker stack deploy -c docker-compose.yml mystack
 
 docker network rm webnet
 docker network create --driver overlay --attachable webnet
+
+docker network create --driver overlay --attachable elastic_network
+
+ls -l filebeat.yml
+
+
+sudo chown $(whoami):$(whoami) ./filebeat.yml
+sudo chown root:root ./filebeat.yml
+
+docker stack deploy -c elastic/elastic.stack.yml elastic
+docker stack deploy -c kibana/kibana.stack.yml kibana
+docker stack deploy -c filebeat/filebeat.stack.yml filebeat

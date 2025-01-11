@@ -1,0 +1,15 @@
+services:
+  web:
+    image: app:1.0.2
+    volumes:
+      - ./html:/var/www/html
+    networks:
+      - webnet
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+
+networks:
+  webnet:
+    external: true
