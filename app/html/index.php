@@ -15,105 +15,113 @@
             <!-- Client Information -->
             <div class="col-md-6">
                 <h2>Client Information</h2>
-                <table class="table table-striped table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Attribute</th>
-                            <th>Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Client IP</td>
-                            <td><?= htmlspecialchars($_SERVER['REMOTE_ADDR'] ?? 'Not Available') ?></td>
-                        </tr>
-                        <tr>
-                            <td>Forwarded For</td>
-                            <td><?= htmlspecialchars($_SERVER['HTTP_X_FORWARDED_FOR'] ?? 'Not Available') ?></td>
-                        </tr>
-                        <tr>
-                            <td>Remote Port</td>
-                            <td><?= htmlspecialchars($_SERVER['REMOTE_PORT'] ?? 'Not Available') ?></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Attribute</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Client IP</td>
+                                <td><?= htmlspecialchars($_SERVER['REMOTE_ADDR'] ?? 'Not Available') ?></td>
+                            </tr>
+                            <tr>
+                                <td>Forwarded For</td>
+                                <td><?= htmlspecialchars($_SERVER['HTTP_X_FORWARDED_FOR'] ?? 'Not Available') ?></td>
+                            </tr>
+                            <tr>
+                                <td>Remote Port</td>
+                                <td><?= htmlspecialchars($_SERVER['REMOTE_PORT'] ?? 'Not Available') ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- Server Information -->
             <div class="col-md-6">
                 <h2>Server Information</h2>
-                <table class="table table-striped table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Attribute</th>
-                            <th>Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Server IP</td>
-                            <td><?= htmlspecialchars($_SERVER['SERVER_ADDR'] ?? 'Not Available') ?></td>
-                        </tr>
-                        <tr>
-                            <td>Server Name</td>
-                            <td><?= htmlspecialchars($_SERVER['SERVER_NAME'] ?? 'Not Available') ?></td>
-                        </tr>
-                        <tr>
-                            <td>Server Port</td>
-                            <td><?= htmlspecialchars($_SERVER['SERVER_PORT'] ?? 'Not Available') ?></td>
-                        </tr>
-                        <tr>
-                            <td>Document Root</td>
-                            <td><?= htmlspecialchars($_SERVER['DOCUMENT_ROOT'] ?? 'Not Available') ?></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Attribute</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Server IP</td>
+                                <td><?= htmlspecialchars($_SERVER['SERVER_ADDR'] ?? 'Not Available') ?></td>
+                            </tr>
+                            <tr>
+                                <td>Server Name</td>
+                                <td><?= htmlspecialchars($_SERVER['SERVER_NAME'] ?? 'Not Available') ?></td>
+                            </tr>
+                            <tr>
+                                <td>Server Port</td>
+                                <td><?= htmlspecialchars($_SERVER['SERVER_PORT'] ?? 'Not Available') ?></td>
+                            </tr>
+                            <tr>
+                                <td>Document Root</td>
+                                <td><?= htmlspecialchars($_SERVER['DOCUMENT_ROOT'] ?? 'Not Available') ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
         <h2>Request Headers</h2>
-        <table class="table table-striped table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th>Header</th>
-                    <th>Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach (getallheaders() as $key => $value): ?>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
                     <tr>
-                        <td><?= htmlspecialchars($key) ?></td>
-                        <td><?= htmlspecialchars($value) ?></td>
+                        <th>Header</th>
+                        <th>Value</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php foreach (getallheaders() as $key => $value): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($key) ?></td>
+                            <td><?= htmlspecialchars($value) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
 
         <h2>Server Variables</h2>
-        <table class="table table-striped table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th>Variable</th>
-                    <th>Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($_SERVER as $key => $value): ?>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
                     <tr>
-                        <td><?= htmlspecialchars($key) ?></td>
-                        <td>
-                            <?php
-                            if (is_array($value)) {
-                                echo '<pre>' . htmlspecialchars(print_r($value, true)) . '</pre>';
-                            } else {
-                                echo htmlspecialchars($value);
-                            }
-                            ?>
-                        </td>
+                        <th>Variable</th>
+                        <th>Value</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php foreach ($_SERVER as $key => $value): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($key) ?></td>
+                            <td>
+                                <?php
+                                if (is_array($value)) {
+                                    echo '<pre>' . htmlspecialchars(print_r($value, true)) . '</pre>';
+                                } else {
+                                    echo htmlspecialchars($value);
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- Bootstrap JS Bundle CDN -->

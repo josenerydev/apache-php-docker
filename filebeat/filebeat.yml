@@ -1,24 +1,24 @@
-filebeat.inputs:
-  - type: container
-    enabled: true
-    paths:
-      - /var/lib/docker/containers/*/*.log
-    processors:
-      - add_docker_metadata: ~
-      - decode_json_fields:
-          fields: ["message"]
-          target: "json"
-          overwrite_keys: true
+filebeat.modules:
+  - module: nginx
+    access:
+      enabled: true
+      var.paths: ["/usr/share/nginx/logs/access.log*"]
+    error:
+      enabled: true
+      var.paths: ["/usr/share/nginx/logs/error.log*"]
 
 output.elasticsearch:
   hosts: ["http://elasticsearch:9200"]
   username: "elastic"
   password: "TdptwLko5fGX6THYSnMtHFUSh0SYltT/pncvdxjyj60g="
 
-setup.kibana:
-  host: "http://kibana:5601"
+setup.template.enabled: true
+setup.template.overwrite: true
 
-logging:
-  level: debug
-  to_event: true
-  selectors: ["*"]
+logging.level: debug
+logging.to_files: true
+logging.files:
+  path: /usr/share/filebeat/logs
+  name: filebeat
+  keepfiles: 7
+  permissions: 0644

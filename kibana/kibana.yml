@@ -1,4 +1,4 @@
 server.name: kibana
 server.host: "0.0.0.0"
 elasticsearch.hosts: ["http://elasticsearch:9200"]
-elasticsearch.serviceAccountToken: "AAEAAWVsYXN0aWMva2liYW5hL2tpYmFuYS10b2tlbjpRQnpkSjBOalR2dXhfb2xicXBJcm9n"
+elasticsearch.serviceAccountToken: "AAEAAWVsYXN0aWMva2liYW5hL2tpYmFuYS10b2tlbjpnT2VHdUd3a1FobVlWR1JpWnFDbWt3"
