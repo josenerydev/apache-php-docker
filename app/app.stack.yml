@@ -3,6 +3,7 @@ services:
     image: app:1.0.2
     volumes:
       - ./html:/var/www/html
+      - ./logs:/var/log/apache2
     networks:
       - webnet
     deploy:
