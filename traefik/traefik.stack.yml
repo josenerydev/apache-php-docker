@@ -1,0 +1,52 @@
+services:
+  ########################################################################
+  # SERVIÇO TRAEFIK
+  ########################################################################
+  traefik:
+    image: traefik:v3.1.2
+    command:
+      - "--api.dashboard=true"                  # Habilita o dashboard
+      - "--api.insecure=true"                   # Dashboard sem autenticação (cuidado em produção)
+      - "--providers.swarm=true"                # Usa o Swarm como provedor
+      - "--providers.swarm.endpoint=unix:///var/run/docker.sock"
+      - "--entrypoints.web.address=:80"         # EntryPoint "web" usando a porta 80 dentro do container
+      - "--entrypoints.dashboard.address=:8081" # EntryPoint "dashboard" usando porta 8081 dentro do container
+      - "--entrypoints.web.forwardedHeaders.insecure=true"
+      - "--entrypoints.web.forwardedHeaders.trustedIPs=10.0.0.0/8"
+
+    # ATENÇÃO: aqui estamos mapeando
+    #  - 80 (host) -> 80 (container)     (web)
+    #  - 8081 (host) -> 8080 (container) (dashboard)
+    #   mas repare que no `command` acima definimos :8081 para o dashboard.
+    #   Então precisamos alinhar (veja explicação abaixo).
+    ports:
+      - "80:80"
+      - "8081:8080"
+
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - webnet
+
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        # Se quiser expor o Traefik em si (para ver se está "no ar"):
+        - "traefik.enable=true"
+
+        # Roteador do dashboard (opcional, se quiser acessar externamente).
+        # Vamos associar o hostname traefik.local ao entrypoint "dashboard".
+        - "traefik.http.routers.traefik-dashboard.rule=Host(`traefik.local`)"
+        - "traefik.http.routers.traefik-dashboard.entrypoints=dashboard"
+        - "traefik.http.routers.traefik-dashboard.service=api@internal"
+
+        # Se o container do Traefik está expondo a porta do dashboard
+        # internamente em 8080, você deve usar 8080 aqui no label.
+        # (Não 80!)
+        - "traefik.http.services.traefik-dashboard.loadbalancer.server.port=8080"
+
+networks:
+  webnet:
+    external: true

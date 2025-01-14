@@ -1,16 +1,19 @@
 services:
   web:
-    image: app:1.0.7
-    volumes:
-      - ./logs:/var/log/apache2
+    image: app:1.0.11
     networks:
       - webnet
     deploy:
       replicas: 3
       placement:
-        max_replicas_per_node: 2
+        max_replicas_per_node: 3
       restart_policy:
         condition: on-failure
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.web.rule=Host(`app.local`)"
+        - "traefik.http.routers.web.entrypoints=web"
+        - "traefik.http.services.web.loadbalancer.server.port=80"
 
 networks:
   webnet:
