@@ -3,7 +3,7 @@ services:
     image: nginx:alpine
     ports:
       - target: 80
-        published: 8080
+        published: 80
         protocol: tcp
         mode: host
     volumes:
