@@ -4,6 +4,8 @@ RUN a2enmod rewrite remoteip headers
 
 COPY conf/000-default.conf /etc/apache2/sites-available/000-default.conf
 
+COPY conf/php.ini /usr/local/etc/php/php.ini
+
 COPY html/ /var/www/html/
 
 RUN chown -R www-data:www-data /var/www/html
