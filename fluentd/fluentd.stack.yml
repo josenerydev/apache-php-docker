@@ -1,5 +1,5 @@
 services:
-  fluentd_service:
+  fluentd:
     image: josenerydev/fluentd:latest
     volumes:
       - ./conf:/fluentd/etc

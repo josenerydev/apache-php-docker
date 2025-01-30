@@ -1,15 +1,20 @@
 services:
   web:
     image: app:1.0.7
-    volumes:
-      - ./logs:/var/log/apache2
     networks:
       - webnet
+      - elastic_network
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: "host.docker.internal:24224"
+        tag: "apache"
+        fluentd-async: "true"
     deploy:
       replicas: 3
-      restart_policy:
-        condition: on-failure
 
 networks:
   webnet:
+    external: true
+  elastic_network:
     external: true
