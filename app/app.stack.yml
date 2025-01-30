@@ -1,6 +1,6 @@
 services:
   web:
-    image: app:1.0.7
+    image: app:2.0.1
     networks:
       - webnet
       - elastic_network
