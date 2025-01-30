@@ -1,5 +1,5 @@
 services:
-  fluentd:
+  fluentd_service:
     image: josenerydev/fluentd:latest
     volumes:
       - ./conf:/fluentd/etc
@@ -9,7 +9,7 @@ services:
     networks:
       - elastic_network
     deploy:
-      mode: global
+      replicas: 1
 
 networks:
   elastic_network:

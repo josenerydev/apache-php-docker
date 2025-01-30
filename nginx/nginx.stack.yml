@@ -19,6 +19,7 @@ services:
       options:
         fluentd-address: "host.docker.internal:24224"
         tag: "nginx.container"
+        fluentd-async: "true"
     deploy:
       mode: global
 

@@ -21,3 +21,6 @@ docker stack rm elasticsearch
 docker stack rm fluentd
 docker stack rm kibana
 docker stack rm nginx
+
+
+docker service ps nginx_nginx --no-trunc
