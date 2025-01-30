@@ -16,3 +16,8 @@ sudo chown root:root ./filebeat.yml
 docker stack deploy -c elastic/elastic.stack.yml elastic
 docker stack deploy -c kibana/kibana.stack.yml kibana
 docker stack deploy -c filebeat/filebeat.stack.yml filebeat
+
+docker stack rm elasticsearch
+docker stack rm fluentd
+docker stack rm kibana
+docker stack rm nginx

@@ -1,0 +1,16 @@
+services:
+  fluentd:
+    image: josenerydev/fluentd:latest
+    volumes:
+      - ./conf:/fluentd/etc
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+    networks:
+      - elastic_network
+    deploy:
+      mode: global
+
+networks:
+  elastic_network:
+    external: true
